@@ -1,0 +1,23 @@
+class Solution(object):
+    def videoStitching(self, clips, time):
+
+        end = 0
+        count = 0
+        ingression = True
+        found = False
+        while ((not found) and ingression):
+            ingression = False
+            max = end
+            for clip in clips:
+                if (clip[0] <= end):
+                    if (clip[1] > max): 
+                        max = clip[1]
+                        ingression = True
+            if end >= time: 
+                found = True
+                break
+            count+=1
+            end = max
+
+        return count   if found else -1
+
