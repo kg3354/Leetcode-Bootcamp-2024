@@ -1,0 +1,12 @@
+class Solution(object):
+    def maxArea(self, height):
+        end = len(height) -1
+        begin = 0
+        area = 0
+        while (begin < end):
+            area = max(area, (min(height[begin],height[end]) * (end-begin)))
+            if height[begin] < height[end]:
+                begin += 1
+            else:
+                end -= 1
+        return area
