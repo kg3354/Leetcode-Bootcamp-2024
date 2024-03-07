@@ -1,0 +1,30 @@
+class Solution(object):
+    def myAtoi(self, s):
+        result = 0
+        positive = 1
+        i = 0
+        n = len(s)
+        
+        # Skip leading whitespaces
+        while i < n and s[i] == ' ':
+            i += 1
+            
+        # Handle sign
+        if i < n and s[i] == '-':
+            positive = -1
+            i += 1
+        elif i < n and s[i] == '+':
+            i += 1
+        
+        # Convert number
+        start = i
+        while i < n and s[i].isnumeric():
+            i += 1
+            
+        if start < i: 
+            result = int(s[start:i])
+        
+        result = result * positive
+        if (result > pow(2,31) -1): result = pow(2,31)-1
+        if (result < -pow(2,31)): result = -pow(2,31)
+        return result
