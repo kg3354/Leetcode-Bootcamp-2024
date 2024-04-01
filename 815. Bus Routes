@@ -1,0 +1,36 @@
+class Solution(object):
+    def numBusesToDestination(self, routes, source, target):
+        """
+        :type routes: List[List[int]]
+        :type source: int
+        :type target: int
+        :rtype: int
+        """
+      
+        allRoutes = defaultdict(list)
+        for bus, stops in enumerate(routes):
+            for stop in stops:
+                allRoutes[stop].append(bus)
+        
+        Queue = deque()
+        Queue.append([source,0])
+        travelled_route = set()
+        
+        while Queue:
+            stop, buses_taken = Queue.popleft()
+            
+            if stop == target:
+                return buses_taken
+            
+            for bus in allRoutes[stop]:
+                if bus not in travelled_route:
+                    for s in routes[bus]:
+                        Queue.append([s, buses_taken+1])
+                    travelled_route.add(bus)
+                
+        return -1    
+
+            
+
+
+        
