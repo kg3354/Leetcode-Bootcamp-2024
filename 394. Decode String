@@ -1,0 +1,24 @@
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack = []
+        result = ""
+        times = 0
+        for curr in s:
+            if curr.isdigit():
+                times = times*10 + int(curr)
+            elif curr == '[':
+ 
+                stack.append((result, times))
+                result, times = "", 0
+            elif curr == ']':
+           
+                strr,multi = stack.pop()
+                result = strr + multi* result  
+            else:
+                result += curr
+
+        return result
